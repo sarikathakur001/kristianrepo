@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
+app.get('/create-customer', (req, res) => {
     res.send('Welcome to the backend!');
 });
 
