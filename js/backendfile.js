@@ -6,7 +6,8 @@ const stripe = require('stripe')('sk_live_51Q53TFJgaj9k6ZWyTdivpx0JAInT4UA08ZAN7
 const app = express();
 
 // Enable CORS to allow requests from the Webflow front-end
-app.use(cors());
+app.use(cors({ origin: 'https://informativ-reklame-124.webflow.io' }));
+
 
 // Middleware to parse incoming JSON requests
 app.use(bodyParser.json());
