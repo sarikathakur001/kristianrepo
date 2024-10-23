@@ -1,21 +1,45 @@
 const express = require('express');
+const cors = require('cors'); // Import CORS
+const bodyParser = require('body-parser');
+const stripe = require('stripe')('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'); // Replace with your Stripe Secret Key
+
 const app = express();
-app.use(express.json()); // To parse JSON request bodies
 
-// Example GET route (for testing purposes only)
-app.get('/create-customer', (req, res) => {
-    res.send('This endpoint is for creating customers.');
+// Enable CORS to allow requests from the Webflow front-end
+app.use(cors());
+
+// Middleware to parse incoming JSON requests
+app.use(bodyParser.json());
+
+// Route to create a customer in Stripe
+app.post('/create-customer', async (req, res) => {
+    try {
+        const { name, email, shipping } = req.body;
+
+        // Create a customer in Stripe
+        const customer = await stripe.customers.create({
+            name: name,
+            email: email,
+            shipping: {
+                name: name,
+                address: {
+                    line1: shipping.address.line1,
+                    city: shipping.address.city,
+                    postal_code: shipping.address.postal_code,
+                    country: shipping.address.country
+                }
+            }
+        });
+
+        // Return customer ID or the full customer object
+        res.json({ success: true, customer });
+    } catch (error) {
+        console.error('Error creating customer:', error);
+        res.status(500).json({ error: error.message });
+    }
 });
 
-// Example POST route (recommended)
-app.post('/create-customer', (req, res) => {
-    const { name, email, address } = req.body;
-
-    // Your code to create a customer goes here (e.g., call to Stripe API)
-    
-    res.send({ success: true, message: 'Customer created successfully.' });
-});
-
+// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
