@@ -6,30 +6,20 @@ const stripe = require('stripe')('sk_live_51Q53TFJgaj9k6ZWyTdivpx0JAInT4UA08ZAN7
 const app = express();
 
 // Enable CORS for Webflow Domain
-app.use(cors({
-    origin: 'https://informativ-reklame-124.webflow.io', // Allow only Webflow domain
+const corsOptions = {
+    origin: 'https://informativ-reklame-124.webflow.io', // Replace with your Webflow domain
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true // Add if needed to send cookies or authorization headers
-}));
+    credentials: true // Allows credentials to be sent
+};
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://informativ-reklame-124.webflow.io");
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.header("Access-Control-Allow-Credentials", "true");
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(204); // Send 204 status code for preflight
-    }
-    next();
-});
+app.use(cors(corsOptions)); // Apply CORS to all routes
 
+// Handle preflight requests for all routes
+app.options('*', cors(corsOptions));
 
-// Middleware to parse incoming JSON requests
+// Middleware to parse JSON requests
 app.use(bodyParser.json());
-
-// Handle preflight requests globally
-app.options('*', cors());
 
 // Route to create a customer in Stripe
 app.post('/create-customer', async (req, res) => {
