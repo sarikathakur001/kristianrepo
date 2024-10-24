@@ -7,7 +7,7 @@ const app = express();
 
 // CORS Configuration to Allow Requests from Anywhere
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://informativ-reklame-124.webflow.io"); // Allows requests from any origin
+    res.header("Access-Control-Allow-Origin", "*"); // Allows requests from any origin
     res.header("Access-Control-Allow-Methods", "GET, POST"); // Allows specific methods
     res.header("Access-Control-Allow-Headers", "Content-Type"); // Allows specific headers
     next();
