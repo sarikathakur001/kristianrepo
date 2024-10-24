@@ -13,6 +13,18 @@ app.use(cors({
     credentials: true // Add if needed to send cookies or authorization headers
 }));
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://informativ-reklame-124.webflow.io");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(204); // Send 204 status code for preflight
+    }
+    next();
+});
+
+
 // Middleware to parse incoming JSON requests
 app.use(bodyParser.json());
 
