@@ -23,6 +23,9 @@ app.use(cors({
     allowedHeaders: ['Content-Type']
 }));
 
+// Handle preflight requests for /create-customer
+app.options('/create-customer', cors()); // This line handles preflight requests
+
 // Middleware to parse incoming JSON requests
 app.use(bodyParser.json());
 
