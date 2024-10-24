@@ -6,15 +6,22 @@ const stripe = require('stripe')('sk_live_51Q53TFJgaj9k6ZWyTdivpx0JAInT4UA08ZAN7
 const app = express();
 
 // CORS Configuration to Allow Requests from Anywhere
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); // Allows requests from any origin
-    res.header("Access-Control-Allow-Methods", "GET, POST"); // Allows specific methods
-    res.header("Access-Control-Allow-Headers", "Content-Type"); // Allows specific headers
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*"); // Allows requests from any origin
+//     res.header("Access-Control-Allow-Methods", "GET, POST"); // Allows specific methods
+//     res.header("Access-Control-Allow-Headers", "Content-Type"); // Allows specific headers
+//     next();
+// });
 
 // Alternatively, use the CORS package for more control
 // app.use(cors({ origin: 'https://informativ-reklame-124.webflow.io' })); // Allow only Webflow domain
+
+// Enable CORS for Webflow Domain
+app.use(cors({
+    origin: 'https://informativ-reklame-124.webflow.io', // Allow only Webflow domain
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
 
 // Middleware to parse incoming JSON requests
 app.use(bodyParser.json());
