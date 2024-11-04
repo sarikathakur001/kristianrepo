@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const customerRoutes = require('./js/customer');  // Import routes
+const customerRoutes = require('./js/backendfile');  // Import routes
 
 const app = express();
 
