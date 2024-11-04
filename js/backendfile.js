@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Use environment variable for the Stripe key
+const stripe = require('stripe')(process.env.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); // Use environment variable for the Stripe key
 
 // Route to create a customer and invoice in Stripe
 router.post('/create-customer', async (req, res) => {
