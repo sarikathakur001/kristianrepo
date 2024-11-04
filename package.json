@@ -1,1 +1,29 @@
+<<<<<<< HEAD
 
+=======
+{
+  "name": "kristianrepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarikathakur001/kristianrepo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarikathakur001/kristianrepo/issues"
+  },
+  "homepage": "https://github.com/sarikathakur001/kristianrepo#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "stripe": "^17.2.1"
+  }
+}
+>>>>>>> 870782c (Added new folder 'routes' and related files)
